@@ -1,7 +1,7 @@
 # config.py — Central Knowledge & Prompts for AI Medical Report Analyzer
 
 # ── Model & Retry Settings ─────────────────────────────────────────────────
-GEMINI_MODEL    = "gemini-1.5-flash"
+GEMINI_MODEL    = "gemini-2.5-flash"
 MAX_RETRIES     = 2
 
 # ── Risk Detection Keywords ────────────────────────────────────────────────

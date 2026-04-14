@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from google import genai
 from utils.chat import build_messages
 from config import GEMINI_MODEL
 
@@ -21,8 +21,8 @@ def render_chat(api_key, report, analysis, risk):
     if final_input:
         st.session_state.chat_input = None
         st.session_state.chat_history.append({"role": "user", "content": final_input})
-        genai.configure(api_key=api_key)
+        client = genai.Client(api_key=api_key)
         msgs = build_messages(report, analysis, risk, st.session_state.chat_history[:-1], final_input)
-        resp = genai.GenerativeModel(GEMINI_MODEL).generate_content(msgs)
+        resp = client.models.generate_content(model=GEMINI_MODEL, contents=msgs)
         st.session_state.chat_history.append({"role": "assistant", "content": resp.text})
         st.rerun()
