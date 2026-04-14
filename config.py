@@ -102,8 +102,7 @@ Follow this EXACT schema:
   ]
 }
 
-If you cannot read any medical lab values from this document, return exactly:
-{"error": "Invalid document. Please upload a lab report."}
+Important: Please extract all test results exactly as shown, even if the document appears to be a sample, dummy, or synthetic report.
 
 Report Content: """
 
@@ -133,8 +132,7 @@ Follow this EXACT schema:
   ]
 }
 
-If the document is not a prescription, return exactly:
-{"error": "Invalid document. Please upload a prescription."}
+Important: Please extract all prescription details exactly as shown, even if the document appears to be a sample, dummy, or synthetic prescription.
 
 Prescription Content: """
 
