@@ -10,6 +10,7 @@ def analyze_report(content, api_key, mode, mime_type=None):
     # Send all files as binary for better AI vision/context
     inp = [{"mime_type": mime_type, "data": content}, p] if isinstance(content, bytes) else [p, content]
     
+    last_error = "Unknown Error"
     for i in range(MAX_RETRIES + 1):
         try:
             resp = model.generate_content(inp)
@@ -23,4 +24,5 @@ def analyze_report(content, api_key, mode, mime_type=None):
             print(f"Debug {i}: Brackets missing. Raw head: {raw[:200]}")
         except Exception as e:
             print(f"Debug {i}: Exception: {e}")
-    return {"error": "AI failed to generate a valid report. Check terminal for Debug logs."}
+            last_error = str(e)
+    return {"error": f"AI Error: {last_error}"}
