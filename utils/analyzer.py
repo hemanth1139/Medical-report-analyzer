@@ -8,9 +8,20 @@ def analyze_report(content, api_key, mode, mime_type=None):
     client = genai.Client(api_key=api_key)
     p = LAB_PROMPT if mode == "lab" else PRESCRIPTION_PROMPT
     
-    # Send all files as binary for better AI vision/context
+    # Automatically detect actual MIME type from file signature if Streamlit gets confused
     if isinstance(content, bytes):
-        part = types.Part.from_bytes(data=content, mime_type=mime_type or "application/pdf")
+        if content.startswith(b'%PDF'):
+            actual_mime = "application/pdf"
+        elif content.startswith(b'\x89PNG'):
+            actual_mime = "image/png"
+        elif content.startswith(b'\xff\xd8'):
+            actual_mime = "image/jpeg"
+        elif content.startswith(b'GIF8'):
+            actual_mime = "image/gif"
+        else:
+            actual_mime = "image/png"  # safe fallback for images
+            
+        part = types.Part.from_bytes(data=content, mime_type=actual_mime)
         inp = [part, p]
     else:
         inp = [p, content]

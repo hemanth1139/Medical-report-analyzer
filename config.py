@@ -102,7 +102,7 @@ Follow this EXACT schema:
   ]
 }
 
-If the document is not a medical lab report, return exactly:
+If you cannot read any medical lab values from this document, return exactly:
 {"error": "Invalid document. Please upload a lab report."}
 
 Report Content: """
