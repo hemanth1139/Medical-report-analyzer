@@ -12,7 +12,13 @@ from utils.terms import find_terms
 
 load_dotenv()
 st.set_page_config(page_title="AI Medical Analyzer", layout="wide")
-api_key = os.getenv("GEMINI_API_KEY")
+
+# Handle API Key for both local (.env) and Streamlit Cloud (st.secrets)
+api_key = st.secrets.get("GEMINI_API_KEY") if "GEMINI_API_KEY" in st.secrets else os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+    st.error("⚠️ GEMINI_API_KEY is not set. Please configure it in your environment or Streamlit Secrets.")
+    st.stop()
 
 for key, default in {"report_content": None, "analysis": None, "risk_level": "UNKNOWN", 
                     "risk_keywords": [], "chat_history": []}.items():
