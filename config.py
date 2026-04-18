@@ -56,12 +56,35 @@ MEDICAL_TERMS = {
 
 # ── JSON Schema Validation Keys ────────────────────────────────────────────
 SCHEMA_REQUIRED_KEYS = [
-    "report_type", "summary", "key_findings", "risk_level",
+    "report_type", "patient_name", "summary", "key_findings", "risk_level",
     "risk_reasons", "recommendation", "lifestyle_tips", "medical_terms_used"
 ]
 REQUIRED_FINDING_KEYS = [
     "test_name", "patient_value", "normal_range", "status", "plain_explanation"
 ]
+
+# ── Document Classification / Pre-Validation Prompt ────────────────────────
+CLASSIFICATION_PROMPT = """You are a strict document classifier.
+Look at the uploaded document and respond with ONLY a valid JSON object — no text before or after.
+
+Your task is to determine:
+1. Whether this document is a medical document (lab report or prescription) or something else (resume, invoice, ID card, etc.)
+2. The document category
+
+Respond using this EXACT schema:
+{
+  "is_medical": true or false,
+  "document_category": "One of: Lab Report, Prescription, Medical Certificate, Other Medical, Resume, ID Card, Invoice, Legal Document, Other Non-Medical",
+  "confidence": "One of: High, Medium, Low",
+  "reason": "One sentence explaining why you classified it this way"
+}
+
+IMPORTANT:
+- A Resume/CV is NOT a medical document even if it mentions a person's name or medical school.
+- A lab report contains test values, reference ranges, and patient details.
+- A prescription contains medication names, dosages, and doctor information.
+- If the document is not clearly a medical lab report or prescription, set is_medical to false.
+"""
 
 # ── Chat Suggestion Buttons ────────────────────────────────────────────────
 CHAT_SUGGESTIONS = [
@@ -76,6 +99,9 @@ NO markdown. NO code fences. NO text before or after the JSON.
 Follow this EXACT schema:
 {
   "report_type": "Specific type e.g. CBC, Lipid Panel, Thyroid Panel",
+  "patient_name": "Full name of the patient as printed on the report. If not found, use 'Not Specified'",
+  "patient_age": "Age or date of birth as printed on the report. If not found, use 'Not Specified'",
+  "report_date": "Date of the report as printed. If not found, use 'Not Specified'",
   "summary": "3-4 sentence plain English overview of overall health status",
   "key_findings": [
     {
@@ -102,7 +128,10 @@ Follow this EXACT schema:
   ]
 }
 
-Important: Please extract all test results exactly as shown, even if the document appears to be a sample, dummy, or synthetic report.
+IMPORTANT RULES:
+- Extract the patient_name EXACTLY as it appears in the report header or patient details section.
+- Do NOT infer or guess the patient name from any other part of the document.
+- Extract all test results exactly as shown, even if the document appears to be a sample, dummy, or synthetic report.
 
 Report Content: """
 
@@ -114,6 +143,10 @@ NO markdown. NO code fences. NO text before or after the JSON.
 Follow this EXACT schema:
 {
   "prescription_type": "e.g. Outpatient, Handwritten, Hospital Discharge",
+  "patient_name": "Full name of the patient as printed on the prescription. If not found, use 'Not Specified'",
+  "patient_age": "Age or date of birth as printed. If not found, use 'Not Specified'",
+  "prescribed_date": "Date the prescription was written. If not found, use 'Not Specified'",
+  "prescribing_doctor": "Doctor's name and registration number if visible. If not found, use 'Not Specified'",
   "summary": "2-4 sentences in plain English describing the full regimen",
   "urgency": "One of: Routine, Soon, Urgent",
   "medications": [
@@ -132,7 +165,10 @@ Follow this EXACT schema:
   ]
 }
 
-Important: Please extract all prescription details exactly as shown, even if the document appears to be a sample, dummy, or synthetic prescription.
+IMPORTANT RULES:
+- Extract the patient_name EXACTLY as it appears on the prescription.
+- Do NOT infer or guess the patient name from any other part of the document.
+- Extract all prescription details exactly as shown, even if the document appears to be a sample, dummy, or synthetic prescription.
 
 Prescription Content: """
 
