@@ -1,0 +1,74 @@
+[
+  {
+    "id": "001",
+    "report_type": "CBC (Complete Blood Count)",
+    "input_text": "Patient: Ananya Sharma, Age: 28F. Hemoglobin: 9.2 g/dL (Normal: 12-16), WBC: 6800 cells/uL (Normal: 4000-11000), RBC: 3.5 million/uL (Normal: 4.2-5.4), Platelets: 210,000/uL (Normal: 150,000-400,000), MCV: 72 fL (Normal: 80-100 fL). Report Date: 15-Apr-2026.",
+    "reference_summary": "The patient shows significantly low hemoglobin at 9.2 g/dL, well below the normal female range of 12-16 g/dL, indicating moderate iron-deficiency anemia. Red blood cell count is also reduced at 3.5 million/uL. The low MCV of 72 fL confirms microcytic anemia, consistent with iron deficiency. White blood cells and platelets are within normal ranges suggesting no active infection or clotting disorder.",
+    "reference_recommendation": "Consult a physician for iron supplementation therapy. Consider dietary increase in iron-rich foods like spinach, lentils, and red meat. A serum ferritin and iron panel test is recommended to confirm iron deficiency as the cause. Follow up in 4-6 weeks after starting treatment.",
+    "reference_risk_level": "Moderate",
+    "reference_findings_summary": "Hemoglobin critically low, RBC low, MCV low — microcytic anemia pattern. WBC and platelets normal."
+  },
+  {
+    "id": "002",
+    "report_type": "Lipid Panel",
+    "input_text": "Patient: Rajesh Kumar, Age: 52M. Total Cholesterol: 248 mg/dL (Normal: <200), LDL: 172 mg/dL (Normal: <100 optimal), HDL: 36 mg/dL (Normal: >40 men), Triglycerides: 312 mg/dL (Normal: <150), VLDL: 62 mg/dL (Normal: <30). Report Date: 10-Apr-2026.",
+    "reference_summary": "The patient's lipid profile reveals multiple concerning abnormalities indicating high cardiovascular risk. Total cholesterol is elevated at 248 mg/dL, LDL (bad cholesterol) is dangerously high at 172 mg/dL, and HDL (good cholesterol) is below the acceptable male threshold at 36 mg/dL. Severely elevated triglycerides at 312 mg/dL and VLDL further compound the cardiovascular risk. This combination significantly increases the risk of heart attack and stroke.",
+    "reference_recommendation": "Urgent consultation with a cardiologist is strongly advised. Begin statin therapy as prescribed by the physician. Adopt a heart-healthy diet by eliminating trans fats, fried foods, and refined sugars. Regular aerobic exercise for at least 30 minutes five days a week is recommended. Retest lipid panel in 6-8 weeks after lifestyle or medication changes.",
+    "reference_risk_level": "High",
+    "reference_findings_summary": "Total cholesterol high, LDL high, HDL low, triglycerides severely elevated, VLDL high — high cardiovascular risk."
+  },
+  {
+    "id": "003",
+    "report_type": "Thyroid Panel",
+    "input_text": "Patient: Meera Nair, Age: 35F. TSH: 8.9 mIU/L (Normal: 0.4-4.0), Free T4: 0.6 ng/dL (Normal: 0.8-1.8), Free T3: 2.1 pg/mL (Normal: 2.3-4.2), Anti-TPO Antibodies: 420 IU/mL (Normal: <35). Report Date: 12-Apr-2026.",
+    "reference_summary": "The patient's thyroid results indicate primary hypothyroidism with elevated TSH at 8.9 mIU/L and reduced Free T4 and T3 levels. The significantly elevated Anti-TPO antibodies at 420 IU/mL strongly suggest Hashimoto's thyroiditis, an autoimmune condition where the immune system attacks the thyroid gland. This is a treatable condition but requires medical management to prevent worsening symptoms such as fatigue, weight gain, and depression.",
+    "reference_recommendation": "See an endocrinologist for thyroid hormone replacement therapy, typically levothyroxine. Regular TSH monitoring every 6-8 weeks until levels stabilize. Avoid excessive iodine intake. Monitor for autoimmune-related complications. Inform the doctor of all current medications as thyroid hormones interact with several drugs.",
+    "reference_risk_level": "Moderate",
+    "reference_findings_summary": "TSH elevated, Free T4 and T3 low, Anti-TPO very high — Hashimoto's thyroiditis with hypothyroidism."
+  },
+  {
+    "id": "004",
+    "report_type": "Diabetes Panel (HbA1c & Glucose)",
+    "input_text": "Patient: Suresh Patel, Age: 58M. Fasting Blood Glucose: 218 mg/dL (Normal: 70-100), Post-Prandial Glucose (2hr): 310 mg/dL (Normal: <140), HbA1c: 9.4% (Normal: <5.7%), Fasting Insulin: 3.2 mIU/L (Normal: 2-25), C-Peptide: 0.8 ng/mL (Normal: 0.9-7.1). Report Date: 08-Apr-2026.",
+    "reference_summary": "The patient's results indicate severely uncontrolled Type 2 Diabetes Mellitus. An HbA1c of 9.4% reflects a 3-month average blood sugar far above the diabetic control target of 7%. Both fasting and post-meal glucose values are critically elevated. Low C-peptide levels suggest the pancreas is not producing sufficient insulin, indicating a need for insulin therapy or medication adjustment. Immediate medical intervention is required to prevent diabetic complications such as nephropathy, neuropathy, and retinopathy.",
+    "reference_recommendation": "Immediate consultation with an endocrinologist or diabetologist is mandatory. Medication or insulin regimen needs urgent review and adjustment. Strict low-carbohydrate, low-glycemic index diet is essential. Daily blood glucose self-monitoring at home is required. HbA1c rechecked in 3 months. Screen for diabetic complications including kidney function and eye examination.",
+    "reference_risk_level": "High",
+    "reference_findings_summary": "Fasting glucose critically high, post-meal glucose very high, HbA1c 9.4% — severely uncontrolled Type 2 Diabetes."
+  },
+  {
+    "id": "005",
+    "report_type": "Liver Function Test (LFT)",
+    "input_text": "Patient: Kavitha Reddy, Age: 42F. ALT (SGPT): 98 U/L (Normal: 7-40), AST (SGOT): 87 U/L (Normal: 10-40), Alkaline Phosphatase: 178 U/L (Normal: 44-147), Total Bilirubin: 2.8 mg/dL (Normal: 0.2-1.2), Direct Bilirubin: 1.9 mg/dL (Normal: 0-0.3), Albumin: 3.1 g/dL (Normal: 3.5-5.0), Total Protein: 5.8 g/dL (Normal: 6.3-8.2). Report Date: 11-Apr-2026.",
+    "reference_summary": "The liver function tests reveal significant hepatic dysfunction across multiple markers. ALT and AST are more than twice the upper normal limit, indicating active liver cell damage or inflammation. Elevated alkaline phosphatase and direct bilirubin suggest possible bile duct obstruction or cholestasis. Reduced albumin and total protein indicate the liver is failing to synthesize adequate proteins, which may affect clotting and immune function. This pattern warrants urgent hepatological evaluation.",
+    "reference_recommendation": "Urgent referral to a gastroenterologist or hepatologist is required. Avoid all alcohol, NSAIDs, and hepatotoxic drugs. An ultrasound of the abdomen should be conducted immediately to rule out bile duct obstruction or fatty liver disease. Hepatitis B and C viral markers should be tested. Diet should be low in fat and high in easily digestible carbohydrates. Follow-up LFT in 2-4 weeks.",
+    "reference_risk_level": "High",
+    "reference_findings_summary": "ALT and AST elevated 2x, bilirubin elevated, alkaline phosphatase high, albumin low — active liver damage pattern."
+  },
+  {
+    "id": "006",
+    "report_type": "Kidney Function Test (KFT/RFT)",
+    "input_text": "Patient: Mohan Das, Age: 65M. Serum Creatinine: 2.1 mg/dL (Normal: 0.7-1.3), Blood Urea Nitrogen (BUN): 42 mg/dL (Normal: 7-20), eGFR: 34 mL/min/1.73m2 (Normal: >60), Uric Acid: 8.9 mg/dL (Normal: 3.5-7.2), Sodium: 131 mEq/L (Normal: 135-145), Potassium: 5.8 mEq/L (Normal: 3.5-5.0). Report Date: 13-Apr-2026.",
+    "reference_summary": "The patient's kidney function is significantly impaired. Elevated creatinine and BUN combined with an eGFR of 34 indicate Stage 3B Chronic Kidney Disease (CKD), meaning the kidneys are functioning at roughly one-third of normal capacity. Elevated uric acid suggests a gout risk. Critically important is the raised potassium at 5.8 mEq/L, which can cause dangerous cardiac arrhythmias and must be treated urgently. Low sodium also requires monitoring and careful correction.",
+    "reference_recommendation": "Immediate nephrology consultation is mandatory. A low-potassium, low-sodium, low-protein diet must be adopted immediately to reduce kidney workload. Avoid NSAIDs and any nephrotoxic medications. Potassium level must be rechecked within 24-48 hours given the cardiac risk. Monitor blood pressure closely as hypertension accelerates CKD progression. Urine protein test and kidney ultrasound recommended.",
+    "reference_risk_level": "High",
+    "reference_findings_summary": "Creatinine high, BUN high, eGFR 34 (Stage 3B CKD), potassium dangerously elevated, sodium low."
+  },
+  {
+    "id": "007",
+    "report_type": "Vitamin & Mineral Panel",
+    "input_text": "Patient: Priya Verma, Age: 31F. Vitamin D (25-OH): 11.2 ng/mL (Normal: 30-100), Vitamin B12: 142 pg/mL (Normal: 200-900), Serum Iron: 48 ug/dL (Normal: 60-170), Serum Ferritin: 6 ng/mL (Normal: 12-150), Calcium: 8.1 mg/dL (Normal: 8.5-10.5), Magnesium: 1.6 mEq/L (Normal: 1.7-2.2). Report Date: 14-Apr-2026.",
+    "reference_summary": "The patient shows multiple significant nutritional deficiencies. Vitamin D is critically low at 11.2 ng/mL, which is far below the sufficiency threshold and can cause bone weakness, fatigue, and immune dysfunction. Vitamin B12 deficiency at 142 pg/mL may lead to nerve damage, memory problems, and megaloblastic anemia. Iron stores are severely depleted as shown by very low ferritin, indicating iron deficiency that may progress to anemia. Calcium and magnesium are at the lower end of normal, suggesting borderline deficiency.",
+    "reference_recommendation": "High-dose Vitamin D3 supplementation (typically 60,000 IU weekly for 8-12 weeks) should be started as directed by a physician. Vitamin B12 injections or high-dose oral supplements are recommended. Oral iron supplementation with Vitamin C to enhance absorption. Dietary modifications to include dairy, eggs, fish, nuts, and leafy greens. Retest all values after 3 months of supplementation.",
+    "reference_risk_level": "Moderate",
+    "reference_findings_summary": "Vitamin D critically deficient, B12 deficient, iron and ferritin very low, calcium and magnesium borderline low."
+  },
+  {
+    "id": "008",
+    "report_type": "Comprehensive Metabolic Panel",
+    "input_text": "Patient: Arjun Singh, Age: 45M. Fasting Glucose: 107 mg/dL (Normal: 70-100), Total Cholesterol: 195 mg/dL (Normal: <200), LDL: 118 mg/dL (Normal: <100), HDL: 48 mg/dL (Normal: >40), Blood Pressure context: 132/86. Creatinine: 1.0 mg/dL (Normal: 0.7-1.3), ALT: 38 U/L (Normal: 7-40), Hemoglobin: 14.2 g/dL (Normal: 13-17), TSH: 2.1 mIU/L (Normal: 0.4-4.0). Report Date: 16-Apr-2026.",
+    "reference_summary": "The patient's comprehensive metabolic panel shows a mostly normal picture with some early warning signs. Fasting glucose at 107 mg/dL is in the pre-diabetic range and should be monitored carefully. LDL cholesterol is mildly elevated above the optimal level, though total cholesterol remains acceptable. All other parameters including kidney function, liver enzymes, hemoglobin, and thyroid are within normal ranges. Overall health is fair, with early metabolic risk that requires lifestyle interventions.",
+    "reference_recommendation": "Lifestyle changes should be initiated immediately to prevent progression to diabetes and cardiovascular disease. A low-sugar, low-refined-carbohydrate diet is advised to bring fasting glucose below 100 mg/dL. Regular aerobic exercise 5 days a week will help reduce LDL and improve insulin sensitivity. Repeat fasting glucose and HbA1c in 3 months. Annual comprehensive blood panel recommended to monitor progression.",
+    "reference_risk_level": "Low",
+    "reference_findings_summary": "Fasting glucose borderline (pre-diabetes), LDL mildly elevated. All other values normal. Early metabolic risk."
+  }
+]

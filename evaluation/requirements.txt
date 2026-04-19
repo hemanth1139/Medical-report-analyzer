@@ -1,0 +1,16 @@
+# Dependencies for the Evaluation Suite
+# Install with: pip install -r requirements.txt
+
+# Core Gemini SDK (same as main app)
+google-genai
+
+# ROUGE scoring library
+# Used to compute ROUGE-1, ROUGE-2, ROUGE-L metrics
+rouge-score
+
+# NLTK (Natural Language Toolkit)
+# Used for BLEU score computation and tokenization
+nltk
+
+# For loading .env files (API keys)
+python-dotenv
