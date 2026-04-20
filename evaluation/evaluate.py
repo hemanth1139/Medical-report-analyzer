@@ -17,7 +17,6 @@ import datetime
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Fix Windows console encoding
 if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
@@ -50,24 +49,6 @@ GEMINI_MODEL = "gemini-2.5-flash"
 # Set to 3 for ~1 min run. Set to 8 for full run (~4 mins).
 MAX_SAMPLES = 3
 
-# -- ANSI Colors --------------------------------------------------------------
-class C:
-    RESET  = "\033[0m"
-    BOLD   = "\033[1m"
-    DIM    = "\033[2m"
-    BLUE   = "\033[94m"
-    CYAN   = "\033[96m"
-    GREEN  = "\033[92m"
-    YELLOW = "\033[93m"
-    RED    = "\033[91m"
-    WHITE  = "\033[97m"
-    PURPLE = "\033[95m"
-    BG_BLUE   = "\033[44m"
-    BG_DARK   = "\033[100m"
-
-def colored(text, *codes):
-    return "".join(codes) + str(text) + C.RESET
-
 # -- Prompt -------------------------------------------------------------------
 EVAL_PROMPT = """You are a Medical Report Analysis AI.
 Read the following lab report text and respond with ONLY a JSON object.
@@ -95,7 +76,6 @@ Report: """
 # =============================================================================
 
 def get_ai_analysis(client: genai.Client, report_text: str) -> dict:
-    """Send a report to Gemini with retry + rate-limit handling."""
     import time
     prompt = EVAL_PROMPT + report_text
     for attempt in range(3):
@@ -109,13 +89,13 @@ def get_ai_analysis(client: genai.Client, report_text: str) -> dict:
             err = str(ex)
             if "429" in err or "RESOURCE_EXHAUSTED" in err:
                 wait = 65 * (attempt + 1)
-                print(colored(f"  Rate limit hit. Waiting {wait}s...", C.YELLOW))
+                print(f"  Rate limit hit. Waiting {wait}s...")
                 time.sleep(wait)
             elif "403" in err or "PERMISSION_DENIED" in err:
-                print(colored("  API key error — update your GEMINI_API_KEY in .env", C.RED, C.BOLD))
+                print("  API key error — update your GEMINI_API_KEY in .env")
                 break
             else:
-                print(colored(f"  API error: {err[:100]}", C.RED))
+                print(f"  API error: {err[:100]}")
                 break
     return {"summary": "", "recommendation": "", "risk_level": "UNKNOWN"}
 
@@ -137,30 +117,11 @@ def compute_bleu(hypothesis: str, reference: str) -> float:
     ref = reference.lower().split()
     return round(sentence_bleu([ref], hyp, smoothing_function=SmoothingFunction().method1), 4)
 
-
-def score_bar(score: float, width: int = 20) -> str:
-    """Draw a colored ASCII progress bar for a score (0.0 - 1.0)."""
-    filled = int(score * width)
-    bar    = "█" * filled + "░" * (width - filled)
-    if score >= 0.5: color = C.GREEN
-    elif score >= 0.3: color = C.YELLOW
-    else: color = C.RED
-    return colored(bar, color)
-
-
 def score_label(score: float) -> str:
-    if score >= 0.7:   return colored("Excellent", C.GREEN,  C.BOLD)
-    elif score >= 0.5: return colored("Good",      C.GREEN)
-    elif score >= 0.3: return colored("Fair",      C.YELLOW)
-    else:              return colored("Poor",       C.RED)
-
-
-def risk_colored(risk: str) -> str:
-    r = risk.lower()
-    if r == "high" or r == "critical": return colored(risk.upper(), C.RED,    C.BOLD)
-    elif r == "moderate":              return colored(risk.upper(), C.YELLOW, C.BOLD)
-    elif r == "low":                   return colored(risk.upper(), C.GREEN,  C.BOLD)
-    return colored(risk.upper(), C.DIM)
+    if score >= 0.7:   return "Excellent"
+    elif score >= 0.5: return "Good"
+    elif score >= 0.3: return "Fair"
+    else:              return "Poor"
 
 
 # =============================================================================
@@ -170,21 +131,18 @@ def risk_colored(risk: str) -> str:
 def run_evaluation(api_key: str):
     import time
 
-    W = 70  # total width
+    W = 80  # total width
 
-    # ── Banner ────────────────────────────────────────────────────────────────
-    print()
-    print(colored("=" * W, C.BLUE, C.BOLD))
-    print(colored("  AI MEDICAL REPORT ANALYZER", C.WHITE, C.BOLD) +
-          colored("  |  ROUGE & BLEU Evaluation", C.CYAN))
-    print(colored("=" * W, C.BLUE, C.BOLD))
-    print(colored(f"  Model   : ", C.DIM) + colored(GEMINI_MODEL, C.WHITE))
-    print(colored(f"  Samples : ", C.DIM) + colored(f"{MAX_SAMPLES} of 8 reference reports", C.WHITE))
-    print(colored(f"  Date    : ", C.DIM) + colored(datetime.datetime.now().strftime("%Y-%m-%d  %H:%M:%S"), C.WHITE))
-    print(colored("=" * W, C.BLUE, C.BOLD))
-    print()
+    # -- Banner ----------------------------------------------------------------
+    print("\n" + "=" * W)
+    print(" AI MEDICAL REPORT ANALYZER | ROUGE & BLEU Evaluation")
+    print("=" * W)
+    print(f" Model   : {GEMINI_MODEL}")
+    print(f" Samples : {MAX_SAMPLES} of 8 reference reports")
+    print(f" Date    : {datetime.datetime.now().strftime('%Y-%m-%d  %H:%M:%S')}")
+    print("=" * W + "\n")
 
-    # ── Load data ─────────────────────────────────────────────────────────────
+    # -- Load data -------------------------------------------------------------
     with open(DATA_PATH, "r", encoding="utf-8") as f:
         reference_data = json.load(f)[:MAX_SAMPLES]
 
@@ -193,7 +151,7 @@ def run_evaluation(api_key: str):
     all_results   = []
     rouge1_scores, rouge2_scores, rougeL_scores, bleu_scores = [], [], [], []
 
-    # ── Per-sample loop ───────────────────────────────────────────────────────
+    # -- Per-sample loop -------------------------------------------------------
     for i, sample in enumerate(reference_data, 1):
         sid         = sample["id"]
         rtype       = sample["report_type"]
@@ -201,16 +159,13 @@ def run_evaluation(api_key: str):
         ref_summary = sample["reference_summary"]
         ref_recom   = sample["reference_recommendation"]
 
-        # Sample header
-        print(colored(f"  Sample {i}/{len(reference_data)}", C.CYAN, C.BOLD) +
-              colored(f"  ▸  {rtype}", C.WHITE))
-        print(colored("  " + "─" * (W - 2), C.DIM))
+        print(f" Sample {i}/{len(reference_data)} ▸ {rtype}")
+        print("-" * W)
 
-        print(colored("  Querying Gemini AI...", C.DIM), end="", flush=True)
+        print(" Querying Gemini AI... ", end="", flush=True)
         ai_output = get_ai_analysis(client, input_text)
-        print(colored("  done", C.GREEN))
+        print("done.")
 
-        # Delay between calls (free-tier rate limit)
         if i < len(reference_data):
             time.sleep(13)
 
@@ -230,27 +185,24 @@ def run_evaluation(api_key: str):
         rougeL_scores.append(rouge_s["rougeL_f1"])
         bleu_scores.append(bleu)
 
-        # Score display
         r1, r2, rL, bl = rouge_s["rouge1_f1"], rouge_s["rouge2_f1"], rouge_s["rougeL_f1"], bleu
         print()
-        print(colored("  ROUGE-1", C.PURPLE, C.BOLD) + f"  {score_bar(r1)}  {r1:.4f}  {score_label(r1)}")
-        print(colored("  ROUGE-2", C.PURPLE, C.BOLD) + f"  {score_bar(r2)}  {r2:.4f}  {score_label(r2)}")
-        print(colored("  ROUGE-L", C.PURPLE, C.BOLD) + f"  {score_bar(rL)}  {rL:.4f}  {score_label(rL)}")
-        print(colored("  BLEU   ", C.CYAN,   C.BOLD) + f"  {score_bar(bl)}  {bl:.4f}  {score_label(bl)}")
+        print(f" {'Metric':<10} | {'Score':<8} | {'Quality'}")
+        print(" " + "-" * 35)
+        print(f" {'ROUGE-1':<10} | {r1:<8.4f} | {score_label(r1)}")
+        print(f" {'ROUGE-2':<10} | {r2:<8.4f} | {score_label(r2)}")
+        print(f" {'ROUGE-L':<10} | {rL:<8.4f} | {score_label(rL)}")
+        print(f" {'BLEU':<10} | {bl:<8.4f} | {score_label(bl)}")
         print()
 
-        match_str = colored("✔  MATCH",    C.GREEN, C.BOLD) if risk_match else colored("✘  MISMATCH", C.RED)
-        print(colored("  Risk Level →", C.DIM) +
-              f"  AI: {risk_colored(ai_risk):<20}  Ref: {risk_colored(ref_risk):<20}  {match_str}")
+        match_str = "MATCH" if risk_match else "MISMATCH"
+        print(f" Risk Level → AI: {ai_risk.upper():<10} Ref: {ref_risk.upper():<10} [{match_str}]")
         print()
 
-        # AI summary preview
         preview = (ai_summary[:120] + "...") if len(ai_summary) > 120 else ai_summary
-        print(colored("  AI Summary:", C.DIM))
-        print(colored(f"  {preview}", C.DIM))
-        print()
-        print(colored("  " + "─" * (W - 2), C.DIM))
-        print()
+        print(" AI Summary Snippet:")
+        print(f" {preview}")
+        print("\n" + "=" * W + "\n")
 
         all_results.append({
             "id": sid, "report_type": rtype,
@@ -263,48 +215,37 @@ def run_evaluation(api_key: str):
             "bleu_score": bleu,
         })
 
-    # ── Averages ──────────────────────────────────────────────────────────────
+    # -- Averages --------------------------------------------------------------
     avg_r1 = round(sum(rouge1_scores) / len(rouge1_scores), 4)
     avg_r2 = round(sum(rouge2_scores) / len(rouge2_scores), 4)
     avg_rL = round(sum(rougeL_scores) / len(rougeL_scores), 4)
     avg_bl = round(sum(bleu_scores)   / len(bleu_scores),   4)
     risk_matches = sum(1 for r in all_results if r["risk_level_match"])
 
-    # ── Final Summary ─────────────────────────────────────────────────────────
-    print(colored("═" * W, C.BLUE, C.BOLD))
-    print(colored("  EVALUATION SUMMARY", C.WHITE, C.BOLD))
-    print(colored("═" * W, C.BLUE, C.BOLD))
+    # -- Final Summary ---------------------------------------------------------
+    print("=" * W)
+    print(" EVALUATION SUMMARY (AVERAGES)")
+    print("=" * W)
     print()
+    print(f" {'Metric Name':<12} | {'Avg Score':<10} | {'Quality':<12} | {'Description'}")
+    print(" " + "-" * 75)
 
     metrics = [
-        ("ROUGE-1", "Word-level content overlap",    avg_r1),
-        ("ROUGE-2", "Phrase-level content overlap",  avg_r2),
-        ("ROUGE-L", "Sequence & fluency match",      avg_rL),
-        ("BLEU   ", "Word precision score",          avg_bl),
+        ("ROUGE-1", avg_r1, "Word-level content overlap"),
+        ("ROUGE-2", avg_r2, "Phrase-level content overlap"),
+        ("ROUGE-L", avg_rL, "Sequence & fluency match"),
+        ("BLEU", avg_bl, "Word precision score"),
     ]
-    for name, desc, val in metrics:
-        print(f"  {colored(name, C.PURPLE, C.BOLD)}  {score_bar(val, 25)}  "
-              f"{colored(f'{val:.4f}', C.WHITE, C.BOLD)}  {score_label(val)}")
-        print(colored(f"           {desc}", C.DIM))
-        print()
+    
+    for name, val, desc in metrics:
+        print(f" {name:<12} | {val:<10.4f} | {score_label(val):<12} | {desc}")
 
-    print(colored("  " + "─" * (W - 2), C.DIM))
+    print(" " + "-" * 75)
     risk_pct = int(risk_matches / len(all_results) * 100)
-    print(f"  {colored('Risk Level Accuracy', C.CYAN, C.BOLD)}   "
-          f"{colored(f'{risk_matches}/{len(all_results)} samples', C.WHITE, C.BOLD)} "
-          f"matched correctly  ({risk_pct}%)")
-    print()
-    print(colored("═" * W, C.BLUE, C.BOLD))
+    print(f" Risk Accuracy | {risk_matches}/{len(all_results)} matched | ({risk_pct}%)")
+    print("\n" + "=" * W)
 
-    # ── Legend ────────────────────────────────────────────────────────────────
-    print()
-    print(colored("  WHAT THESE SCORES MEAN:", C.WHITE, C.BOLD))
-    print(colored("  ROUGE", C.PURPLE) + colored(" — How much content from the human reference the AI covered", C.DIM))
-    print(colored("  BLEU ", C.CYAN)   + colored(" — How precisely the AI's words matched the reference", C.DIM))
-    print(colored("  Note ", C.YELLOW) + colored(" — Lower BLEU is normal; AI paraphrases rather than copying", C.DIM))
-    print()
-
-    # ── Save JSON ─────────────────────────────────────────────────────────────
+    # -- Save JSON -------------------------------------------------------------
     ts = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     output = {
         "evaluation_date": datetime.datetime.now().isoformat(),
@@ -318,11 +259,9 @@ def run_evaluation(api_key: str):
     with open(rpath, "w", encoding="utf-8") as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
 
-    print(colored(f"  Results saved → {rpath.name}", C.DIM))
-    print()
+    print(f"\n Results saved to: {rpath.name}\n")
 
 
-# =============================================================================
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--api_key", default=None)
@@ -330,7 +269,7 @@ if __name__ == "__main__":
 
     key = args.api_key or os.getenv("GEMINI_API_KEY")
     if not key:
-        print(colored("[ERROR] GEMINI_API_KEY not found.", C.RED, C.BOLD))
+        print("[ERROR] GEMINI_API_KEY not found. Please set it in .env")
         sys.exit(1)
 
     run_evaluation(key)

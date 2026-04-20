@@ -1,4 +1,7 @@
 streamlit
 google-genai
-pillow
+PyMuPDF
+Pillow
 python-dotenv
+faiss-cpu
+sentence-transformers

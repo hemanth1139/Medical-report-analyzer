@@ -1,9 +1,7 @@
 import streamlit as st
-from google import genai
-from utils.chat import build_messages
-from config import GEMINI_MODEL
+from utils.agent import run_agent
 
-def render_chat(api_key, report, analysis, risk):
+def render_chat(api_key, report, analysis, risk, kb_index, kb_facts):
     """Component for interactive chat with the analyzed document."""
     st.divider()
     st.subheader("Chat with your Report")
@@ -16,8 +14,9 @@ def render_chat(api_key, report, analysis, risk):
     if final_input:
         st.session_state.chat_input = None
         st.session_state.chat_history.append({"role": "user", "content": final_input})
-        client = genai.Client(api_key=api_key)
-        msgs = build_messages(report, analysis, risk, st.session_state.chat_history[:-1], final_input)
-        resp = client.models.generate_content(model=GEMINI_MODEL, contents=msgs)
-        st.session_state.chat_history.append({"role": "assistant", "content": resp.text})
+        
+        with st.spinner("Thinking..."):
+            resp_text = run_agent(final_input, report, analysis, risk, kb_index, kb_facts, api_key)
+            
+        st.session_state.chat_history.append({"role": "assistant", "content": resp_text})
         st.rerun()

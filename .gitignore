@@ -1,3 +1,7 @@
 .env
 __pycache__/
 *.pyc
+
+# Evaluation auto-generated files
+evaluation/results/*.json
+evaluation/results/*.html

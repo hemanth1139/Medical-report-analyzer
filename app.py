@@ -9,6 +9,7 @@ from utils.analyzer import analyze_report, classify_document
 from utils.validator import validate_schema
 from utils.risk import detect_risk
 from utils.terms import find_terms
+from utils.knowledge_base import load_index
 
 load_dotenv()
 st.set_page_config(page_title="AI Medical Analyzer", layout="wide")
@@ -23,6 +24,10 @@ if not api_key:
 for key, default in {"report_content": None, "analysis": None, "risk_level": "UNKNOWN", 
                     "risk_keywords": [], "chat_history": []}.items():
     if key not in st.session_state: st.session_state[key] = default
+
+if "kb_index" not in st.session_state:
+    with st.spinner("Loading medical knowledge base..."):
+        st.session_state.kb_index, st.session_state.kb_facts = load_index()
 
 uploaded, analyze_clicked, mode = render_sidebar()
 
@@ -60,5 +65,5 @@ if st.session_state.analysis:
     render_report(analysis, st.session_state.risk_level, 
                   st.session_state.risk_keywords, find_terms(str(analysis)), mode)
     render_chat(api_key, st.session_state.report_content, analysis, 
-                st.session_state.risk_level)
+                st.session_state.risk_level, st.session_state.kb_index, st.session_state.kb_facts)
 

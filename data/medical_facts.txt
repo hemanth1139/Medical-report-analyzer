@@ -1,0 +1,60 @@
+Normal fasting blood glucose range is 70 to 99 mg/dL. Above 126 mg/dL on two tests indicates diabetes.
+HbA1c below 5.7 percent is normal. Between 5.7 and 6.4 is prediabetes. Above 6.5 is diabetes.
+Normal LDL cholesterol is below 100 mg/dL. Above 160 is high risk for heart disease.
+Normal HDL for men is above 40 mg/dL. For women above 50 mg/dL. Higher is better.
+Normal TSH range is 0.4 to 4.0 mIU/L. Below 0.4 means overactive thyroid. Above 4.0 means underactive.
+Normal creatinine for adults is 0.6 to 1.2 mg/dL. High creatinine suggests kidney stress.
+Normal hemoglobin for men is 13.5 to 17.5 g/dL. For women 12 to 15.5 g/dL. Low means anemia.
+Normal platelet count is 150000 to 400000 per microliter. Below 150000 is thrombocytopenia.
+Normal WBC count is 4500 to 11000 cells per microliter. High WBC means infection or inflammation.
+Normal ALT is 7 to 56 units per liter. High ALT means the liver is stressed or damaged.
+Vitamin D deficiency is below 20 ng/mL. Insufficiency is 20 to 29 ng/mL. Normal is above 30 ng/mL.
+Vitamin B12 normal range is 200 to 900 pg/mL. Below 200 causes nerve damage and anemia.
+Normal uric acid for men is 3.4 to 7.0 mg/dL. For women 2.4 to 6.0 mg/dL. High causes gout.
+Normal serum sodium is 136 to 145 mEq/L. Abnormal sodium causes brain and nerve problems.
+Normal potassium is 3.5 to 5.0 mEq/L. Low potassium causes muscle cramps and heart issues.
+eGFR above 90 means normal kidney function. Below 60 for 3 months means chronic kidney disease.
+Normal bilirubin is 0.1 to 1.2 mg/dL. High bilirubin causes jaundice and signals liver issues.
+Normal albumin is 3.4 to 5.4 g/dL. Low albumin means poor liver function or malnutrition.
+Normal ESR for men under 50 is below 15 mm/hr. For women under 50 below 20 mm/hr. High means inflammation.
+Normal INR for a healthy person is 0.8 to 1.1. High INR means blood takes longer to clot.
+Normal calcium is 8.5 to 10.2 mg/dL. High calcium can mean parathyroid or bone problems.
+Normal RBC count for men is 4.7 to 6.1 million per microliter. For women 4.2 to 5.4.
+Normal blood pressure is below 120 over 80 mmHg. Above 140 over 90 is hypertension stage 2.
+Normal resting heart rate is 60 to 100 beats per minute. Below 60 is bradycardia.
+Normal body temperature is 36.1 to 37.2 degrees Celsius. Above 38 is fever.
+Triglycerides below 150 mg/dL is normal. Above 200 is high. Above 500 is very high risk.
+Normal total cholesterol is below 200 mg/dL. Above 240 is high risk for heart disease.
+Iron deficiency anemia shows low hemoglobin, low ferritin, and high TIBC together.
+Thyroid peroxidase antibodies above 35 IU/mL suggest autoimmune thyroid disease.
+Normal fasting insulin is 2 to 25 mIU/L. High fasting insulin indicates insulin resistance.
+Normal AST is 8 to 48 units per liter. High AST indicates liver damage or muscle injury.
+Normal Alkaline Phosphatase (ALP) is 44 to 147 IU/L. High ALP points to bile duct blockage or bone disease.
+Normal GGT is 9 to 48 units per liter. High GGT points to liver disease, often related to alcohol or bile ducts.
+Normal total protein is 6.0 to 8.3 g/dL. Low protein may indicate liver or kidney disease.
+Globulin levels typically range from 2.0 to 3.5 g/dL. High levels suggest chronic inflammation or infection.
+Blood urea nitrogen (BUN) normal range is 7 to 20 mg/dL. High values indicate poor kidney function.
+A high BUN-to-creatinine ratio (above 20:1) can indicate dehydration or gastrointestinal bleeding.
+Normal Hematocrit is 38.3 to 48.6 percent for men and 35.5 to 44.9 percent for women.
+Mean corpuscular volume (MCV) normal range is 80 to 100 fL. High MCV indicates macrocytic anemia, low indicates microcytic.
+Mean corpuscular hemoglobin (MCH) normal range is 27 to 33 picograms per cell.
+Red cell distribution width (RDW) normal range is 11.8 to 15.6 percent. High RDW means varying red blood cell sizes.
+Normal fasting C-peptide is 0.5 to 2.0 ng/mL. Low levels indicate lower insulin production, commonly seen in Type 1 Diabetes.
+Free T3 normal range is 2.3 to 4.1 pg/mL. High levels indicate hyperthyroidism.
+Free T4 normal range is 0.9 to 1.7 ng/dL. Low levels suggest primary hypothyroidism.
+Normal Magnesium is 1.7 to 2.2 mg/dL. Low magnesium can cause muscle spasms and arrhythmias.
+Normal serum iron is 60 to 170 mcg/dL. High levels may indicate hemochromatosis.
+Normal Ferritin is 24 to 336 ng/mL for men and 11 to 307 ng/mL for women. Low ferritin confirms iron deficiency.
+Normal Transferrin saturation is 15 to 50 percent. Below 15 percent suggests low iron availability.
+High-sensitivity CRP (hs-CRP) under 1.0 mg/L means low risk of cardiovascular disease. Above 3.0 means high risk.
+Creatine kinase (CK) normal range is 22 to 198 U/L. Elevated CK means muscle damage.
+Troponin levels are normally undetectable or very low. Elevated troponin strongly indicates an acute heart attack.
+Brain natriuretic peptide (BNP) below 100 pg/mL is normal. Above 400 pg/mL strongly suggests heart failure.
+Lactate dehydrogenase (LDH) normal range is 140 to 280 U/L. High LDH is a marker for tissue damage or hemolysis.
+Homocysteine normal range is less than 15 micromol/L. High levels increase the risk of vascular disease.
+Normal serum phosphorus is 2.5 to 4.5 mg/dL. Imbalance often points to chronic kidney disease or parathyroid issues.
+Prostate-specific antigen (PSA) is normally below 4.0 ng/mL for men. Higher values may warrant investigation for prostate issues.
+Normal aPTT is 25 to 35 seconds. High values mean blood is taking longer to clot.
+D-Dimer is normally less than 0.50 mg/L FEU. High levels indicate the presence of significant blood clots.
+Normal Chloride is 96 to 106 mEq/L. It works with sodium to maintain fluid balance.
+Folate (Vitamin B9) normal range is 2.7 to 17.0 ng/mL. Low folate causes megaloblastic anemia.
